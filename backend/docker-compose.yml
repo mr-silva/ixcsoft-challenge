@@ -1,0 +1,14 @@
+services:
+  app:
+    image: node:16
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    working_dir: /app
+    env_file:
+      - '.env'
+    environment:
+      ENVIRONMENT: '${ENVIRONMENT}'
+    command: yarn api:${ENVIRONMENT}
+    container_name: backend

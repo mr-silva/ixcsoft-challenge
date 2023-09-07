@@ -1,0 +1,46 @@
+{
+  "name": "ixcsoft-challenge-backend",
+  "version": "1.0.0",
+  "description": "Backend da aplicação de desafio da IXC Soft",
+  "author": "Maicon R. Silva <maiconrods@gmail.com>",
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn build && docker-compose up -d",
+    "stop": "docker-compose stop",
+    "logs:api": "docker logs backend -f",
+    "api:prod": "node dist/src/Adapter/Http/api.js",
+    "api:dev": "tsnd --transpile-only --respawn --inspect=0.0.0.0:9229 src/Adapter/Http/api.ts"
+  },
+  "dependencies": {
+    "axios": "^1.1.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "4.3.1",
+    "mongoose": "^6.2.9",
+    "passport": "^0.6.0",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.6.5",
+    "@types/passport": "^1.0.12",
+    "@types/passport-http": "^0.3.9",
+    "@types/passport-http-bearer": "^1.0.37",
+    "@types/passport-local": "^1.0.35",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "4.7.4"
+  }
+}
