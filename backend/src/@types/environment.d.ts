@@ -6,7 +6,6 @@ declare global {
       // App
       PORT: string
       ENVIRONMENT: string
-      APP_SECRET: string
       JWT_SECRET: string
       PASS_SECRET: string
 

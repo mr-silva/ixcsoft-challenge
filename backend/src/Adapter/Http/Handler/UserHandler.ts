@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { Factory } from '../../../Factory'
 import { ResponseEntity } from '../../../../resources/framework/src'
 import { IUserView, UserView } from '../View'
+import { EncodedToken } from '../../../Domain'
 
 export class UserHandler {
   public async create(request: Request, response: Response, next: NextFunction) {
@@ -40,13 +41,25 @@ export class UserHandler {
     try {
       const user = request.user as IUserView
 
-      await Factory.getInstance()
+      const result = await Factory.getInstance()
         .buildUseCaseFactory()
         .buildUserUseCase()
         .buildUpdateStatusUseCase()
         .execute({ id: user.id, online: true })
 
-      return new ResponseEntity(response).noContent()
+      const token = await Promise.resolve(
+        EncodedToken.encode({
+          user: {
+            id: result.getId(),
+            username: result.getUsername(),
+            role: result.getRole()
+          }
+        })
+      )
+
+      return new ResponseEntity(response).ok({
+        token: token.getToken()
+      })
     } catch (error) {
       console.error(error)
       next(error)

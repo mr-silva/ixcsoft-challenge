@@ -2,8 +2,9 @@ import { Router } from 'express'
 import { MessageHandler, UserHandler } from './Handler'
 import passport from 'passport'
 import {
-  MakeBasicAdminAuthenticationStrategyService,
-  MakeBasicClientAuthenticationStrategyService
+  MakeBasicClientAuthenticationStrategyService,
+  MakeBearerAdminAuthenticationStrategyService,
+  MakeBearerClientAuthenticationStrategyService
 } from './Service'
 
 const router = Router()
@@ -14,7 +15,9 @@ const messageHandler = new MessageHandler()
 router
   .route('/user')
   .all(
-    passport.authenticate(MakeBasicAdminAuthenticationStrategyService.execute(), { session: false })
+    passport.authenticate(MakeBearerAdminAuthenticationStrategyService.execute(), {
+      session: false
+    })
   )
   .post(userHandler.create.bind(userHandler))
 
@@ -30,7 +33,7 @@ router
 router
   .route('/logout')
   .all(
-    passport.authenticate(MakeBasicClientAuthenticationStrategyService.execute(), {
+    passport.authenticate(MakeBearerClientAuthenticationStrategyService.execute(), {
       session: false
     })
   )
@@ -39,7 +42,7 @@ router
 router
   .route('/user/list')
   .all(
-    passport.authenticate(MakeBasicClientAuthenticationStrategyService.execute(), {
+    passport.authenticate(MakeBearerClientAuthenticationStrategyService.execute(), {
       session: false
     })
   )
@@ -48,7 +51,7 @@ router
 router
   .route('/message')
   .all(
-    passport.authenticate(MakeBasicClientAuthenticationStrategyService.execute(), {
+    passport.authenticate(MakeBearerClientAuthenticationStrategyService.execute(), {
       session: false
     })
   )
@@ -57,7 +60,7 @@ router
 router
   .route('/message/chat/from/:userId')
   .all(
-    passport.authenticate(MakeBasicClientAuthenticationStrategyService.execute(), {
+    passport.authenticate(MakeBearerClientAuthenticationStrategyService.execute(), {
       session: false
     })
   )
@@ -66,7 +69,7 @@ router
 router
   .route('/message/chat/active')
   .all(
-    passport.authenticate(MakeBasicClientAuthenticationStrategyService.execute(), {
+    passport.authenticate(MakeBearerClientAuthenticationStrategyService.execute(), {
       session: false
     })
   )
