@@ -15,10 +15,12 @@ export function useGetOnlineUsers(): GetOnlineUsersResponse {
   const { "nextauth.token": token } = parseCookies()
 
   const { isLoading, isError, isSuccess, data } = useQuery(
-    ["useGetOnlineUsers", token],
+    ["useGetOnlineUsers"],
     () => getOnline(token),
     { enabled: false }
   )
+
+  console.log(isSuccess, isLoading, isError)
 
   return {
     data,

@@ -6,16 +6,13 @@ import { UserResponse } from "@/services/user"
 import { useContext, useEffect, useState } from "react"
 
 export default function Home() {
-  const { isAuthenticated, token } = useContext(AuthContext)
-  const { data, isSuccess } = useGetOnlineUsers()
+  const { data } = useGetOnlineUsers()
 
   const [users, setUsers] = useState<UserResponse[]>([])
 
   useEffect(() => {
-    if (isSuccess) {
-      setUsers(data!)
-    }
-  }, [isSuccess, data])
+    setUsers(data!)
+  }, [data])
 
   return (
     <div className="h-screen flex">

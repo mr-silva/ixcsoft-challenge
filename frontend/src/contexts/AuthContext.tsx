@@ -58,8 +58,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, signIn, error }}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </AuthContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContext.Provider value={{ token, isAuthenticated, signIn, error }}>
+        {children}
+      </AuthContext.Provider>
+    </QueryClientProvider>
   )
 }
